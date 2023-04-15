@@ -30,10 +30,10 @@ metadata:
   labels:
     run: yaalaoui-playground
 spec:
-  ports:
-  - port: 8888
-    protocol: TCP
-    targetPort: 8888
+  type: LoadBalancer
   selector:
     app: yaalaoui-playground
- 
+  ports:
+    - port: 8888
+      protocol: TCP
+      targetPort: 8888
