@@ -4,7 +4,7 @@ metadata:
   name: yaalaoui-playground
   namespace: dev
 spec:
-  replicas: 1
+  replicas: 2
   selector:
     matchLabels:
       app: yaalaoui-playground
@@ -14,7 +14,7 @@ spec:
         app: yaalaoui-playground
     spec:
       containers:
-      - image: wil42/playground:v1
+      - image: wil42/playground:v2
         imagePullPolicy: IfNotPresent
         name: yaalaoui-playground
         ports:
@@ -22,12 +22,6 @@ spec:
           name: http
           protocol: TCP
       restartPolicy: Always
----
-apiVersion: v1
-kind: ServiceAccount
-metadata:
-  name: yaalaoui-playground
-  namespace: dev
 ---
 apiVersion: v1
 kind: Service
