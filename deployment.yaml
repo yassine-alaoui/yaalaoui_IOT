@@ -1,0 +1,46 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: yaalaoui-playground
+  namespace: dev
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: yaalaoui-playground
+  template:
+    metadata:
+      labels:
+        app: yaalaoui-playground
+    spec:
+      containers:
+      - image: wil42/playground:v1
+        imagePullPolicy: IfNotPresent
+        name: yaalaoui-playground
+        ports:
+        - containerPort: 8888
+          name: http
+          protocol: TCP
+      restartPolicy: Always
+---
+apiVersion: v1
+kind: ServiceAccount
+metadata:
+  name: yaalaoui-playground
+  namespace: dev
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: yaalaoui-playground
+  namespace: dev
+  labels:
+    run: yaalaoui-playground
+spec:
+  ports:
+  - name: http
+    port: 8888
+    protocol: TCP
+    targetPort: 8888
+  selector:
+    app: yaalaoui-playground
